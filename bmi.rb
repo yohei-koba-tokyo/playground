@@ -1,6 +1,9 @@
+# BMIを調べるコードです
+
 puts "身長と体重を入力してください(２つの数値の間には半角スペースを入れて、全て半角で入力してください)"
 str = gets
 array = str.split.map(&:to_f)
+
 bmi = (array[1] / ((array[0] / 100) ** 2)).round(1)
 puts "----------"
 puts "BMI:#{bmi}"
