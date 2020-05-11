@@ -18,3 +18,4 @@ rabuko = Student.new("rabuko", 36)
 yohei = Student.new("yoheikobayashi", 37)
 puts yohei.introduce
 puts rabuko.introduce
+
