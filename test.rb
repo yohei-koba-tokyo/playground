@@ -1,26 +1,12 @@
-def dtc(x, y, xi, yi)
-  dtc = (((x - xi)**2 + (y - yi)**2)**(1/2.0)).round(6)
+def powerUp(power, point)
+  power = power * (100 + point)/100
 end
 
-x, y = gets.split.map(&:to_i)
-k = gets.to_i
-gps = []
-N = gets.to_i
+power, point = gets.split.map(&:to_f)
 
-N.times do |i|
-  gps << gets.split.map(&:to_i)
+while point != 0 do
+  power = powerUp(power, 1)
+  point -= 1
 end
 
-gps.each do |xy|
-  xy << dtc(x, y, xy[0], xy[1])
-end
-
-gps.sort! {|a, b| a.last <=> b.last}
-sum = 0
-
-k.times do |i|
-  sum += gps[i][2]
-end
-
-puts (sum / k).round
-
+puts (power / 1).to_i
