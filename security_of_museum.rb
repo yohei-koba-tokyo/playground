@@ -7,10 +7,17 @@ end
 def view(direction, wide, target_x, target_y)
   a = (direction - wide/2).to_f
   b = (direction + wide/2).to_f
+  upper_range = a+360
+  downer_range = b-360
 
   x = atan2(target_y, target_x)/PI*180
-  while (direction - x).abs >= 360 do
-    direction - x > 0 ? x += 360 : x -= 360
+
+  while x < downer_range || x > upper_range
+    if x > direction
+      x -= 360
+    else
+      x += 360
+    end
   end
 
   if x >= a && x <= b
@@ -18,6 +25,7 @@ def view(direction, wide, target_x, target_y)
   else
     return false
   end
+
 end
 
 width, height, M, N = gets.split.map(&:to_i)
