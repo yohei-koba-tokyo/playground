@@ -1,0 +1,53 @@
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  color: #black;
+  margin: 0 auto;
+}
+h1,h2,h3,h4,h5,h6,p {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 36px;
+  font-size: calc(2.4rem + ((1vw - 0.64rem) * 2.1429));
+}
+
+h2 {
+  font-size: 24px;
+  font-size: calc(2rem + ((1vw - 0.64rem) * 0.7143));
+}
+
+div {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (min-width: 1200px) {
+  h1{
+    font-size: 3.6rem;
+  }
+  h2 {
+    font-size: 2.4rem;
+  }
+}
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+
+

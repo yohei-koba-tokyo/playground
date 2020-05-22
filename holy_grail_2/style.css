@@ -1,0 +1,45 @@
+
+
+body {
+  width: 800px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 150px;
+}
+
+div {
+  display: flex;
+  flex: 1;
+}
+
+main {
+  flex: 1;
+}
+
+nav {
+  width: 150px;
+}
+
+aside {
+  width: 200px;
+}
+
+footer {
+  height: 200px;
+}
+
+@media screen and (max-width: 900px) {
+  body, nav, aside {
+    width: 100%;
+  }
+  div {
+    flex-direction: column;
+  }
+  main {
+    order: -1;
+  }
+}
