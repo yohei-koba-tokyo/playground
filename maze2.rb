@@ -1,18 +1,4 @@
-
-
-
-
-
-
-
-
-
-
 # 以下コードはテスト中です
-
-
-
-
 
 
 def cross
@@ -36,6 +22,13 @@ end
 
 
 puts imap
+puts words
+
+
+
+
+
+
 
 words.each do |word|
   answere = "no"
@@ -70,22 +63,22 @@ end
 
 
 
-# words.each do |word|
-#   iimap =imap
-#   answere = "no"
+words.each do |word|
+  iimap =imap
+  answere = "no"
   
-#   word.each do |w|
-#     iam = []
-#     imap.each_with_index do |line, index|
-#       search = line.each_index.select{|i| line[i] == w}
-#       search.each do |s|
-#         iam << [index, s]
-#       end
-#       iam.each do |iam|
-#         cross = [imap[iam[0], iam[1]-1], imap[iam[0]-1, iam[1]], imap[iam[0], iam[1]+1], imap[iam[0]+1, iam[1]]]
-#         cross.each do |c|
-#           imap[c[0]][c|1|] == 
-#       end
+  word.each do |w|
+    iam = []
+    imap.each_with_index do |line, index|
+      search = line.each_index.select{|i| line[i] == w}
+      search.each do |s|
+        iam << [index, s]
+      end
+      iam.each do |iam|
+        cross = [imap[iam[0], iam[1]-1], imap[iam[0]-1, iam[1]], imap[iam[0], iam[1]+1], imap[iam[0]+1, iam[1]]]
+        cross.each do |c|
+          imap[c[0]][c|1|] == 
+      end
 
-#     end
-#   end
+    end
+  end
