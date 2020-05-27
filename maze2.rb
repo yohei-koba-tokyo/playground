@@ -47,16 +47,30 @@ words.each do |word|
   # p start_point
   # print "end   "
   # p end_point
-  start_point.each_with_index do |sp, s|
-    end_point.each_with_index do |ep, e|
+  start_point.each do |sp|
+    end_point.each do |ep|
       distance = (ep[0]-sp[0]).abs + (ep[1]-sp[1]).abs
       if distance != 0 && distance <= word.length && (word.length - distance).even? && word.length <= N**2 - 1
         # puts "      test OK"
-
-      
+        def solve(x, y, ep, table, word, answere, count, history)
+          [[x+1, y], [x-1, y], [x, y+1], [x, y-1]].each do |dir|
+            next if table[dir[0], dir[1]] != word[count] or history.include?([dir[0], dir[1]])
+            
+            if count == word.length - 1
+              answere = "yes"
+              break
+            else
+              solve(dir[0], dir[1], ep, table, word, answere, count+1, history << [dir[0], dir[1]])
+            end
+          end
+        end
+        p sp
+        p ep
+        p word
+        solve(sp[0], sp[1], ep, table, word, answere, 0, [sp[0], sp[1]])
       end
     end
   end
-
+  puts answere
 end
 
