@@ -16,6 +16,10 @@ M = gets.to_i
 M.times do
   words << gets.chomp
 end
+puts "--------------"
+puts table
+puts words
+puts "--------------"
 
 
 
