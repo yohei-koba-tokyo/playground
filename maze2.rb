@@ -1,10 +1,45 @@
-# 以下コードはテスト中です
 
+# マス目のアルファベットをたどって文字列が組めるかを判定する
+
+# 入力例
+# 4
+# abcd
+# efgh
+# hgfe
+# dcba
+# 5
+# abfgf
+# bfgc
+# abfga
+# hdc
+# fghde
+
+def cue_point(table, word)
+  cue = []
+  table.each_with_index do |line, index|
+    start = line.chars.each_index.select{|i| line[i] == word}
+    start.each do |s|
+      cue << [index, s]
+    end
+  end
+  return cue
+end
+
+def solve_start_to_end(sp, ep, history, word, table, index)
+  [[sp[0]-1, sp[1]], [sp[0], sp[1]+1], [sp[0]+1, sp[1]], [sp[0], sp[1]-1]].each do |dir|
+    next if table[dir[0]][dir[1]] != word[index] || history.include?([dir[0], dir[1]])
+    if dir == ep && (index + 1) == word.length
+      return true
+    else
+      solve_start_to_end(dir, ep, history + [dir], word, table, index + 1) ? (return true) : false 
+    end
+  end
+  false
+end
 
 table = []
 words = []
 
-# 入力ゾーン
 N = gets.to_i
 table << ("."*(N+2))
 N.times do
@@ -16,61 +51,28 @@ M = gets.to_i
 M.times do
   words << gets.chomp
 end
-puts "--------------"
-puts table
-puts words
-puts "--------------"
-
-
 
 words.each do |word|
-
-  start_point = []
-  table.each_with_index do |line, index|
-    start = line.chars.each_index.select{|i| line[i] == word[0]}
-    start.each do |s|
-      start_point << [index, s]
+  result = false
+  if word.length == 1
+    table.each do |line|
+      result = line.include?(word)
+      break if result
     end
   end
-
-  end_point = []
-  table.each_with_index do |line, index|
-    start = line.chars.each_index.select{|i| line[i] == word.chars.last}
-    start.each do |s|
-      end_point << [index, s]
-    end
-  end
-
-  answere = "no"
+  start_point = cue_point(table, word[0])
+  end_point = cue_point(table, word.chars.last)
   word.slice!(0)
-  # print "start "
-  # p start_point
-  # print "end   "
-  # p end_point
   start_point.each do |sp|
     end_point.each do |ep|
       distance = (ep[0]-sp[0]).abs + (ep[1]-sp[1]).abs
       if distance != 0 && distance <= word.length && (word.length - distance).even? && word.length <= N**2 - 1
-        # puts "      test OK"
-        def solve(x, y, ep, table, word, answere, count, history)
-          [[x+1, y], [x-1, y], [x, y+1], [x, y-1]].each do |dir|
-            next if table[dir[0], dir[1]] != word[count] or history.include?([dir[0], dir[1]])
-            
-            if count == word.length - 1
-              answere = "yes"
-              break
-            else
-              solve(dir[0], dir[1], ep, table, word, answere, count+1, history << [dir[0], dir[1]])
-            end
-          end
-        end
-        p sp
-        p ep
-        p word
-        solve(sp[0], sp[1], ep, table, word, answere, 0, [sp[0], sp[1]])
+        result = solve_start_to_end(sp, ep, [sp], word, table, 0)
+        break if result
       end
     end
+    break if result
   end
-  puts answere
+  result ? (puts "yes") : (puts "no")
 end
 
