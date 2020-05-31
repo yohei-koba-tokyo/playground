@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuejs_practice</title>
+</head>
+<body>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <div id="app">
+    <p>{{message}}</p>
+    <p v-text="message"></p>
+    <p>{{ number + 3 }}</p>
+    <p>{{ ok ? 'YES' : 'NO' }}</p>
+    <p>{{ sayHi() }}</p>
+    <button v-on:click="reverseMessage">反転</button>
+  </div>
+
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message: "HelloWorld",
+        number : 4,
+        ok     : false
+      },
+      methods: {
+        reverseMessage: function() {
+          this.message = this.message.split("").reverse().join("");
+        },
+        sayHi: function() {
+          return this.message;
+        }
+      }
+    });
+  </script>
+  
+</body>
+</html>
