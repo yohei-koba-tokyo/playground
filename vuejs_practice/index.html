@@ -18,6 +18,13 @@
     <p>{{ number + 3 }}</p>
     <p>{{ ok ? 'YES' : 'NO' }}</p>
     <p>{{ sayHi() }}</p>
+    <div v-html='html'></div>
+    <a v-bind:href="url">google</a>
+    <a :href="url">google2</a>
+    <a :[attribute]='url'>google3</a>
+    <a :href="urlTwitter" :id='number'>twitter</a>
+    <a v-bind="{href: urlTwitter, id: number}">twitter</a>
+    <a v-bind="legrosObject">legro</a>
     <button v-on:click="reverseMessage">反転</button>
   </div>
 
@@ -27,8 +34,18 @@
       el: "#app",
       data: {
         message: "HelloWorld",
-        number : 4,
-        ok     : false
+        number    : 4,
+        ok        : false,
+        html      : '<h2>whatsup</h2>',
+        url       : 'https://google.com',
+        urlTwitter: 'https://twitter.com',
+        attribute : 'href',
+        number    : 31,
+        
+        legrosObject: {
+          href: 'https://yohei-koba-tokyo.github.io/lovepeaceandcodes/',
+          id  : 32
+        }
       },
       methods: {
         reverseMessage: function() {
