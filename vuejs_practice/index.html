@@ -26,10 +26,23 @@
     <a v-bind="{href: urlTwitter, id: number}">twitter</a>
     <a v-bind="legrosObject">legro</a>
     <p>現在{{ clickNum }}回クリック</p>
+    <p>{{ clickNum > 3 ? 'over 3' : 'under 3' }}</p>
+    <p>{{ lessThanThree }}</p>
+    <p>{{ lessThanthreeMethod() }}</p>
     <button v-on:click="countUp()">カウントアップ</button>
     <button v-on:click="reverseMessage">反転</button>
+    <p v-on:mousemove="changeMousePosition">マウスを遊ばせてください</p>
+    <p v-on:[event1]="changeMousePosition">マウスを遊ばせてください</p>
+    <h1 v-on:mousemove="changeMousePosition2($event, 10)">マウスを遊ばせてください1/10<span v-on:mousemove="noEvent">ここは無効に！stopPropagation</span></h1>
+    <h1 v-on:mousemove="changeMousePosition3($event, 10)">マウスを遊ばせてください1/10<span v-on:mousemove.stop>ここは無効に！修飾子stop</span></h1>
+    <p>X:{{ x }}, Y:{{ y }}</p>
+    <a v-on:click="noEvent2" href="http://google.com">google 飛ばないようにするpreventDefault</a>
+    <a v-on:click.prevent href="http://google.com">google 飛ばないようにする修飾子prevent</a>
+    <!-- キー修飾子とは、キーボード専用に既往 -->
+    <input type="text" v-on:keyup.enter.space="myAlert">
+    <input type="text" v-model="message">
   </div>
-
+<!-- v-bind は  :     v-on  は  @   省略可 -->
 
   <script>
     new Vue({
@@ -44,12 +57,30 @@
         urlTwitter: 'https://twitter.com',
         attribute : 'href',
         number    : 31,
-
+        event1    : 'mousemove',
+        x :0,
+        y :0,
         legrosObject: {
           href: 'https://yohei-koba-tokyo.github.io/lovepeaceandcodes/',
           id  : 32
         }
       },
+// 動的なプロパティを作ろときは、メソッドではなくcomptedプロパティが良い。メソッドは読み込まれるたびに実行してしまうから
+      computed: {
+        lessThanThree: function() {
+          return this.clickNum > 3 ? 'over 3 computed' : 'under 3 computed'
+        }
+      },
+
+      watch: {
+        clickNum: function() {
+          const vm = this;
+          setTimeout(function(){
+            vm.clickNum = 0
+          }, 3000)
+        }
+      },
+
       methods: {
         reverseMessage: function() {
           this.message = this.message.split("").reverse().join("");
@@ -58,7 +89,31 @@
           return this.message;
         },
         countUp: function() {
-          this.clickNum ++
+          this.clickNum ++;
+        },
+        changeMousePosition: function(event) {
+          this.x = event.clientX;
+          this.y = event.clientY;
+        },
+        changeMousePosition2: function(event, divideNumber) {
+          this.x = event.clientX / divideNumber;
+          this.y = event.clientY / divideNumber;
+        },
+        noEvent: function(event) {
+          event.stopPropagation()
+        },
+        changeMousePosition3: function(event, divideNumber) {
+          this.x = event.clientX / divideNumber;
+          this.y = event.clientY / divideNumber;
+        },
+        noEvent2: function(event) {
+          event.preventDefault();
+        },
+        myAlert() {
+          alert('enterやスペース押して離すとアラート');
+        },
+        lessThanthreeMethod: function() {
+          return this.clickNum > 3 ? 'over 3 method' : 'under 3 method'
         }
       }
     });

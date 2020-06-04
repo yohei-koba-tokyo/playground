@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuejs_practice2</title>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="app">
+  <p :class="classObject">{{ counter }}</p>
+  <button @click='changeColor'>切り替え</button>
+  <button @click='countUp'>+1</button>
+  <button @click='countUp()'>+1</button>
+  <p>{{ doubleCounterComputed }}</p>
+  <p>{{ doubleCounterMethod() }}</p>
+  <p :class="[{green: isActive}, {purple: !isActive}]">green or purple</p>
+  <p :style="styleObject">whatsup</p>
+</div>
+<p>hello</p>
+
+<script>
+
+  new Vue({
+
+    el: '#app',
+    data: {
+      counter : 0,
+      isActive : true,
+      green: 'green',
+      purple: 'purple',
+      styleObject: {
+        color: 'red',
+        'background-color': 'blue'
+      }
+    },
+    methods: {
+      countUp : function() {
+        this.counter ++
+      },
+      doubleCounterMethod : function() {
+        return this.counter * 2
+      },
+      changeColor : function() {
+        this.isActive = !this.isActive
+      }
+    },
+    computed: {
+      doubleCounterComputed : function() {
+        return this.counter * 2
+      },
+      classObject: function() {
+        return { red: this.isActive, 'bg-blue': !this.isActive }
+      },
+      classObject2: function() {
+        return { green: this.isActive, purple: !this.isActive }
+      }
+    }
+  });
+
+</script>
+</body>
+</html>
