@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuejs_practice2</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <ul>
+    <!-- :key属性はtemplateタグ使えない！ -->
+    <div v-for="fruit in fruits" :key="fruit">
+      <p>{{fruit}}</p>
+      <input type="text">
+    </div>
+  </ul>
+  <button @click="remove">先頭削除</button>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      fruits: ['りんご', 'バナナ', 'ぶどう']
+    },
+    methods: {
+      remove: function() {
+        this.fruits.shift()
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

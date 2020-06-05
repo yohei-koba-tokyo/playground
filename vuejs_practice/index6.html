@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuejs_practice2</title>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{message}}</p>
+  <p>{{name}}</p>
+  <p>{{myData}}</p>
+  <button @click="message = '変更！'">変更！</button>
+</div>
+
+<div id="app2">
+</div>
+
+<div id="app3"></div>
+
+<script>
+
+  var data = {
+    message: 'hello',
+    name: 'yohei'
+  }
+
+  var vm = new Vue ({
+    el: '#app',
+    data: data,
+    computed: {
+      myData: function() {
+        return this.$data;
+      }
+    }
+  })
+  // elプロパティの代わりのやりかた
+  // vm.$mount('#app')
+
+  // console.log(data === vm.$data);
+  // console.log(vm.$data);
+
+  new Vue({
+    data: {
+      name: 'ようへい'
+    },
+    template: '<h1>こんにちは、{{name}}</h1>'
+  }).$mount('#app2')
+
+  new Vue({
+    data: {
+      name: 'ようへい'
+    },
+    render: function(createElement) {
+      return createElement('h1', 'こんにちは、' + this.name); 
+    }
+  }).$mount('#app3')
+
+  document.createElement('div');
+
+</script>
+</body>
+</html>
