@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuejs_practice2</title>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <hello></hello>
+  <h1>こんにちは、{{name}}</h1>
+  <hello></hello>
+  <button @click="name = '太郎さん'">名前を変更</button>
+  <button @click="destroy">インスタンスを破壊</button>
+  <hello></hello>
+  <hello></hello>
+</div>
+
+<script>
+
+Vue.component('hello', {
+  template: '<p>こんにちは</p>'
+});
+
+var vm = new Vue ({
+  el : '#app',
+  data : {
+    name: 'ようへい'
+  },
+  beforeCreate: function() {
+    console.log('beforeCreate');
+  },
+  created: function() {
+    console.log('Created');
+  },
+  beforeMount: function() {
+    console.log('beforeMount');
+  },
+  mounted: function() {
+    console.log('mounted');
+  },
+  beforeUpdate: function() {
+    console.log('beforeUpdate');
+  },
+  updated: function() {
+    console.log('updated')
+  },
+  beforeDestroy: function() {
+    console.log('beforeDestroy');
+  },
+  destroyed: function() {
+    console.log('destroyed');
+  },
+  methods: {
+    destroy: function() {
+      this.$destroy()
+    }
+  }
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
