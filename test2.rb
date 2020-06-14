@@ -9,8 +9,6 @@
 # 900 800 400 500
 # 200 200 200 300
 
-
-
 # タクシー
 
 # 追加料金を返すメソッド
@@ -41,5 +39,4 @@ taxies.each do |taxi|
   price_list << price(distance, taxi)
 end
 
-p price_list
 puts "#{price_list.min} #{price_list.max}"
