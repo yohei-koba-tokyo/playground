@@ -46,4 +46,4 @@ elsif x == 5
   break
 end
 end
-puts result 
+puts result

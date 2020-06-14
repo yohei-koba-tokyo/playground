@@ -12,4 +12,3 @@ end
 
 puts "何番目のフィボナッチ数を求めますか？"
 puts fib(gets.to_i)
-
