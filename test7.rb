@@ -1,11 +1,3 @@
 
 
-
-
-
-
-
-
-google = "gooooooogle"
-
-puts google.match(/(.)\5+/)
+p ["testtest", ["a", [21, 3, 4], "b", [12, 1, 2], "a", [5, 4, 3]].select{|x, y| x = "a"}[1]]
